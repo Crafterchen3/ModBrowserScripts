@@ -5,9 +5,10 @@ const util = require("util");
 var Outstr;
 var authors;
 var args =process.argv;
-if(args[3] == "§"){
+if(args[3] == "0"){
     args[3] = "";
 }
+args[3] = args[3].replace("0"," ");
 
 
 
