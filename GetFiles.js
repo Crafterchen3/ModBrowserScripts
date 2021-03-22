@@ -12,14 +12,13 @@ var compatible = [];
 var downloadids = [];
 var i = 0;
 // id
-// path
-// name
 // version
 
 main()
 
 async function main(){
     await checkDependencies(args[2])
+    getModFiles(args[2])
     console.log("lol")
 }
 
@@ -50,6 +49,7 @@ async function getDependencies(item, index){
     if (!bool2){
         checkDependencies(item.addonId);
         downloadids.push(item.addonId);
+        getModFiles(item.addonId)
         console.log(downloadids);
     }
 }
@@ -57,16 +57,15 @@ async function getDependencies(item, index){
 
 
 //getModFiles(args[2],args[3],args[4])
-function getModFiles(id, path, name){
+function getModFiles(id){
     curseforge.getModFiles(id).then((files) => {
-        console.log(files);
         files.forEach(getMatch);
         if (compatible[0]){
-            if(compatible[0].mod_dependencies){
-                compatible[0].mod_dependencies.forEach(getDependencies)
-            }
             console.log("download")
-            compatible[0].download(path + name);
+            curseforge.getMod(id).then((mod) => {
+                console.log(mod)
+                compatible[0].download("mods\\" + mod.name + ".jar");    
+            })
         }
     });    
 }
@@ -83,7 +82,7 @@ function getMatch(item,index){
 
 function isThere(item,index){
     if(!bool){
-        bool = item == args[5];
+        bool = item == args[3];
     }
 }
 
