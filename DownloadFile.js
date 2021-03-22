@@ -1,1 +1,0 @@
-const curseforge = require("mc-curseforge-api");
