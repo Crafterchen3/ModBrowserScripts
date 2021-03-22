@@ -5,11 +5,10 @@ const util = require("util");
 var Outstr;
 var authors;
 var args =process.argv;
-if(args[3] == "0"){
+if(args[3] == "?"){
     args[3] = "";
 }
-args[3] = args[3].replace("0"," ");
-
+args[3] = args[3].replace("?"," ")
 
 
 curseforge.getMods({ gameVersion: args[2].toString(), searchFilter: args[3].toString(), index: args[4], pageSize: args[5]}).then((mods) => {
@@ -28,7 +27,7 @@ curseforge.getMods({ gameVersion: args[2].toString(), searchFilter: args[3].toSt
 function writeToFile(item, index){
     var obj_str = util.inspect(item);
     item.authors.forEach(getAuthors);
-    Outstr = Outstr + "<§> \n" + item.name +
+    Outstr = Outstr + "<§>\n" + item.name +
                                  ";" + item.id +
                                  ";" + authors +
                                  ";" + item.summary;
